@@ -106,48 +106,48 @@ It answers the question every security team actually cares about:
 
 ```
 riskwatchpro/
-├── Anubis/                    # Threat intelligence engine
-│   ├── main.py                # Entry point, orchestrator
-│   ├── fetchers/              # Per-source fetch modules
-│   ├── enrichment/            # EPSS, ATT&CK, MSF enrichers
-│   ├── scoring/               # Composite risk scoring
-│   ├── cache/                 # Per-feed TTL cache layer
-│   └── output/                # PostgreSQL, Excel, HTML writers
+├── Anubis/                   
+│   ├── main.py               
+│   ├── fetchers/             
+│   ├── enrichment/            
+│   ├── scoring/              
+│   ├── cache/                 
+│   └── output/               
 │
-├── backend/                   # FastAPI application
-│   ├── main.py                # App entry point
-│   ├── api/                   # Route handlers
-│   │   ├── threats.py         # /api/v1/threats
-│   │   ├── news.py            # /api/v1/news
-│   │   ├── stats.py           # /api/v1/stats
-│   │   ├── auth.py            # /api/v1/auth
-│   │   ├── billing.py         # /api/v1/billing (Paymob)
-│   │   └── grc.py             # /api/v1/grc
-│   ├── models/                # SQLAlchemy models
-│   ├── schemas/               # Pydantic schemas
-│   ├── middleware/             # Auth, rate limiting, plan gates
-│   └── alembic/               # DB migrations
+├── backend/                  
+│   ├── main.py               
+│   ├── api/                  
+│   │   ├── threats.py        
+│   │   ├── news.py            
+│   │   ├── stats.py          
+│   │   ├── auth.py          
+│   │   ├── billing.py         
+│   │   └── grc.py            
+│   ├── models/              
+│   ├── schemas/              
+│   ├── middleware/            
+│   └── alembic/              
 │
-├── frontend/                  # React application
+├── frontend/                 
 │   └── src/
-│       ├── pages/             # Route-level components
-│       ├── components/        # Shared UI components
-│       ├── api/               # API client
-│       ├── context/           # Auth, theme context
-│       └── store/             # State management
+│       ├── pages/            
+│       ├── components/      
+│       ├── api/              
+│       ├── context/          
+│       └── store/             
 │
-├── docs/                      # Documentation
-│   ├── nginx.conf             # Production Nginx config
-│   ├── architecture.md        # Detailed architecture docs
-│   └── api.md                 # API reference
+├── docs/                     
+│   ├── nginx.conf            
+│   ├── architecture.md        
+│   └── api.md                
 │
 ├── .github/
 │   └── workflows/
-│       ├── deploy.yml         # Auto-deploy to EC2 on push to main
-│       └── ci.yml             # Lint + test on PRs
+│       ├── deploy.yml         
+│       └── ci.yml            
 │
-├── docker-compose.yml         # Full stack local development
-└── .env.example               # Environment template
+├── docker-compose.yml         
+└── .env.example              
 ```
 
 ---
