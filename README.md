@@ -220,7 +220,7 @@ riskwatchpro/
 - [x] FAIR risk calculator
 - [x] GRC module (ISO/NIST/SOC2/PCI)
 - [x] Geographic threat actor map
-- [ ] **Paymob billing integration** (in progress)
+- [ ] **billing integration** (in progress)
 - [ ] **AI/ML threat prioritisation layer** (up next)
 - [ ] **Cloud-native deployment** (ECS Fargate + Lambda + RDS Multi-AZ + CloudFront)
 - [ ] SIEM push (Splunk / Microsoft Sentinel)
