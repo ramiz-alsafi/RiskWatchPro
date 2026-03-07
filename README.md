@@ -85,8 +85,6 @@ It answers the question every security team actually cares about:
 
 ## ✨ Features
 
-
-|---------|------|-----|------------|
 | Threat database (11,500+) | 
 | Real-time WebSocket feed | 
 | EPSS + CVSS scoring |
