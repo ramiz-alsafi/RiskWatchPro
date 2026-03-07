@@ -47,8 +47,8 @@ It answers the question every security team actually cares about:
 │                        ANUBIS ENGINE v6.5.1                     │
 │                                                                 │
 │  60+ Threat Feeds (concurrent via ThreadPoolExecutor)           │
-│  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB               │
-│  ├── Metasploit/Rapid7 · ZDI · PacketStorm · OSV               │
+│  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB                │
+│  ├── Metasploit/Rapid7 · ZDI · PacketStorm · OSV                │
 │  ├── MalwareBazaar · ThreatFox · URLHaus · AbuseIPDB · Shodan   │
 │  ├── Vendor Advisories (Fortinet, Cisco, Palo Alto, MSRC...)    │
 │  └── News (BleepingComputer, TheHackerNews, SecurityWeek...)    │
@@ -58,10 +58,10 @@ It answers the question every security team actually cares about:
 │  Enrichment Layer                                               │
 │  ├── EPSS scores (FIRST.org)                                    │
 │  ├── AttackerKB exploitation context                            │
-│  ├── MITRE ATT&CK STIX (691 techniques)                        │
+│  ├── MITRE ATT&CK STIX (691 techniques)                         │
 │  ├── Metasploit module cross-reference (3000+ CVEs)             │
 │  ├── ZDI advisory correlation                                   │
-│  └── IP Geo/ASN · NVD full detail                              │
+│  └── IP Geo/ASN · NVD full detail                               │
 │                          │                                      │
 │  Composite Risk Scoring                                         │
 │  CVSS + EPSS + KEV membership + Exploit availability + Activity │
@@ -75,7 +75,7 @@ It answers the question every security team actually cares about:
 │  ├── WebSocket feed       ├── MITRE ATT&CK heatmap              │
 │  ├── Auth (JWT)           ├── Geographic threat map             │
 │  ├── Subscription gates   ├── FAIR risk calculator              │
-│  └── Paymob billing       └── GRC compliance module            │
+│  └── Paymob billing       └── GRC compliance module             │
 │                                                                 │
 │  PostgreSQL · Nginx · AWS EC2 · Wazuh · Docker                  │
 └─────────────────────────────────────────────────────────────────┘
