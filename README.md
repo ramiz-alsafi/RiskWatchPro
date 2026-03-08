@@ -2,7 +2,7 @@
 <img src="https://img.shields.io/badge/RiskWatchPro-Threat%20Intelligence-e94560?style=for-the-badge&logoColor=white" alt="RiskWatchPro"/>
 
 # ⚡ RiskWatchPro
-### Threat Intelligence Platform
+### Enterprise Threat Intelligence Platform
 
 **Real-time CVE tracking · MITRE ATT&CK mapping · EPSS scoring · GRC compliance · FAIR risk modeling**
 
@@ -11,10 +11,10 @@
 [![GitHub](https://img.shields.io/badge/Built%20by-ramiz--alsafi-24292e?style=flat-square&logo=github)](https://github.com/ramiz-alsafi)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-ramez--alsafy-0a66c2?style=flat-square&logo=linkedin)](https://linkedin.com/in/ramez-alsafy-57b8b437b)
 
-![Python](https://img.shields.io/badge/Python-3.11-3776ab?style=flat-square&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?style=flat-square&logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react&logoColor=black)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?style=flat-square&logo=postgresql&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776ab?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-61dafb?style=flat-square&logo=react&logoColor=black)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-EC2%20%2B%20S3%20%2B%20IAM-ff9900?style=flat-square&logo=amazonaws&logoColor=white)
 ![Wazuh](https://img.shields.io/badge/Wazuh-Hardened-00aef0?style=flat-square)
 
@@ -94,8 +94,9 @@ It answers the question every security team actually cares about:
 | Detection rule generation |
 | API access |
 | TOTP 2FA authentication |
-| Email digest notifications |
-| Live execution tracker |
+| Email digest notifications (post-run) |
+| Email preferences API (opt-in/out, unsubscribe) |
+| Live execution tracker (Run Now + log modal) |
 | SIEM push (Splunk/Sentinel) |
 | SLA + dedicated support |
 
@@ -209,6 +210,7 @@ riskwatchpro/
 - **Nginx** — HTTPS only, HSTS, security headers, server tokens off
 - **JWT Auth** — short-lived access tokens, refresh rotation
 - **TOTP 2FA** — per-user TOTP authentication
+- **Email API** — with test, status, preferences, unsubscribe, manual digest trigger
 - **Rate limiting** — per-endpoint, per-user, per-plan limits
 
 ---
@@ -223,8 +225,10 @@ riskwatchpro/
 - [x] GRC module (ISO/NIST/SOC2/PCI)
 - [x] Geographic threat actor map
 - [x] TOTP 2FA authentication
-- [x] Email digest notifications
+- [x] Email digest notifications (post-run, per-user opt-in)
+- [x] Email API (`/api/v1/emails/` — test, status, preferences, unsubscribe, manual trigger)
 - [x] Live execution tracker (Run Now + log modal)
+- [x] Scheduler race condition fix (max_instances=1, coalesce=True)
 - [ ] **Billing integration** (in progress)
 - [ ] **AI/ML threat prioritisation layer** (up next)
 - [ ] **Cloud-native deployment** (ECS Fargate + Lambda + RDS Multi-AZ + CloudFront)
