@@ -1,10 +1,8 @@
 <div align="center">
-
-<img src="https://img.shields.io/badge/RiskWatchPro-Enterprise%20Threat%20Intelligence-e94560?style=for-the-badge&logoColor=white" alt="RiskWatchPro"/>
+<img src="https://img.shields.io/badge/RiskWatchPro-Threat%20Intelligence-e94560?style=for-the-badge&logoColor=white" alt="RiskWatchPro"/>
 
 # ⚡ RiskWatchPro
-
-### Enterprise Threat Intelligence Platform
+### Threat Intelligence Platform
 
 **Real-time CVE tracking · MITRE ATT&CK mapping · EPSS scoring · GRC compliance · FAIR risk modeling**
 
@@ -33,7 +31,7 @@ It answers the question every security team actually cares about:
 > *"Of the 20,000 CVEs published this year — which 12 are going to hit us this week, and what does it cost if they do?"*
 
 **Live stats (auto-updated):**
-- 🔴 11,500+ threats indexed
+- 🔴 11,000+ threats indexed
 - ⚡ 60+ concurrent intelligence sources
 - 📡 WebSocket real-time feed
 - 🛡 ISO 27001 · NIST 800-53 · SOC 2 · PCI DSS coverage
@@ -44,14 +42,14 @@ It answers the question every security team actually cares about:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        ANUBIS ENGINE v6.5.1                     │
+│                        ANUBIS ENGINE v6.5.2                     │
 │                                                                 │
 │  60+ Threat Feeds (concurrent via ThreadPoolExecutor)           │
 │  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB                │
-│  ├── Metasploit/Rapid7 · ZDI · PacketStorm · OSV                │
+│  ├── Metasploit/Rapid7 · ZDI · Feodo Tracker · OSV              │
 │  ├── MalwareBazaar · ThreatFox · URLHaus · AbuseIPDB · Shodan   │
 │  ├── Vendor Advisories (Fortinet, Cisco, Palo Alto, MSRC...)    │
-│  └── News (BleepingComputer, TheHackerNews, SecurityWeek...)    │
+│  └── News (BleepingComputer, TheHackerNews, CyberSecurityNews…) │
 │                          │                                      │
 │  Normalisation & Deduplication                                  │
 │                          │                                      │
@@ -73,7 +71,7 @@ It answers the question every security team actually cares about:
 │  FastAPI Backend          React Frontend                        │
 │  ├── REST API             ├── Real-time dashboard               │
 │  ├── WebSocket feed       ├── MITRE ATT&CK heatmap              │
-│  ├── Auth (JWT)           ├── Geographic threat map             │
+│  ├── Auth (JWT + TOTP)    ├── Geographic threat map             │
 │  ├── Subscription gates   ├── FAIR risk calculator              │
 │  └── Paymob billing       └── GRC compliance module             │
 │                                                                 │
@@ -85,7 +83,7 @@ It answers the question every security team actually cares about:
 
 ## ✨ Features
 
-| Threat database (11,500+) | 
+| Threat database (11,000+) | 
 | Real-time WebSocket feed | 
 | EPSS + CVSS scoring |
 | MITRE ATT&CK mapping |
@@ -95,6 +93,9 @@ It answers the question every security team actually cares about:
 | Sandbox emulation |
 | Detection rule generation |
 | API access |
+| TOTP 2FA authentication |
+| Email digest notifications |
+| Live execution tracker |
 | SIEM push (Splunk/Sentinel) |
 | SLA + dedicated support |
 
@@ -169,7 +170,6 @@ riskwatchpro/
 - Exploit-DB
 - Rapid7 / Metasploit Framework (3000+ modules)
 - Zero Day Initiative (ZDI)
-- PacketStorm Security
 - Huntr AI/ML CVEs
 
 **Threat Feeds**
@@ -178,6 +178,7 @@ riskwatchpro/
 - URLHaus
 - AbuseIPDB
 - AlienVault OTX
+- Feodo Tracker (C2 IPs)
 - Shodan
 
 **Vendor Advisories**
@@ -193,34 +194,38 @@ riskwatchpro/
 - SANS Internet Storm Center (ISC)
 - BleepingComputer
 - The Hacker News
+- CyberSecurityNews
 - SecurityWeek
 - CERT/CC
 - NCSC
 
 </details>
 
-
 ## 🛡 Security & Infrastructure
 
 - **Hardened AMI** — custom AWS EC2 image, minimal attack surface
 - **Wazuh Agent** — real-time log monitoring, FIM, rootcheck, active response (auto IP blocking)
 - **IAM least-privilege** — scoped roles, no wildcard permissions
-- **Nginx** — HTTPS only, HSTS, security headers
+- **Nginx** — HTTPS only, HSTS, security headers, server tokens off
 - **JWT Auth** — short-lived access tokens, refresh rotation
+- **TOTP 2FA** — per-user TOTP authentication
 - **Rate limiting** — per-endpoint, per-user, per-plan limits
 
 ---
 
 ## 📊 Roadmap
 
-- [x] Anubis v6 — 60+ source engine
+- [x] Anubis v6.5.2 — 60+ source engine
 - [x] RiskWatchPro v1 — Full-stack SaaS platform
 - [x] Real-time WebSocket feed
 - [x] MITRE ATT&CK heatmap
 - [x] FAIR risk calculator
 - [x] GRC module (ISO/NIST/SOC2/PCI)
 - [x] Geographic threat actor map
-- [ ] **billing integration** (in progress)
+- [x] TOTP 2FA authentication
+- [x] Email digest notifications
+- [x] Live execution tracker (Run Now + log modal)
+- [ ] **Billing integration** (in progress)
 - [ ] **AI/ML threat prioritisation layer** (up next)
 - [ ] **Cloud-native deployment** (ECS Fargate + Lambda + RDS Multi-AZ + CloudFront)
 - [ ] SIEM push (Splunk / Microsoft Sentinel)
@@ -232,10 +237,10 @@ riskwatchpro/
 
 **Ramiz Alsafi** — Penetration Tester · Red Team Operator · Threat Intelligence Engineer
 
-📍 Alexandria, Egypt
-🔗 [LinkedIn](https://linkedin.com/in/ramez-alsafy-57b8b437b)
-🐙 [GitHub](https://github.com/ramiz-alsafi)
-💬 [WhatsApp](https://wa.me/201002921824)
+📍 Alexandria, Egypt  
+🔗 [LinkedIn](https://linkedin.com/in/ramez-alsafy-57b8b437b)  
+🐙 [GitHub](https://github.com/ramiz-alsafi)  
+💬 [WhatsApp](https://wa.me/201002921824)  
 📞 +20 100 292 1824
 
 ---
