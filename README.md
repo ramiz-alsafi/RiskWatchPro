@@ -45,11 +45,11 @@ It answers the question every security team actually cares about:
 │                        ANUBIS ENGINE v9.0                           │
 │                                                                     │
 │  60+ Threat Feeds  (concurrent via ThreadPoolExecutor)              │
-│  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB · OSV             │
-│  ├── Metasploit/Rapid7 · ZDI · Feodo Tracker · AbuseIPDB           │
-│  ├── MalwareBazaar · ThreatFox · URLHaus · OTX · Shodan            │
-│  ├── Vendor Advisories (Fortinet, Cisco, Palo Alto, MSRC, F5…)     │
-│  └── News (BleepingComputer, TheHackerNews, SANS ISC, NCSC…)       │
+│  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB · OSV              │
+│  ├── Metasploit/Rapid7 · ZDI · Feodo Tracker · AbuseIPDB            │
+│  ├── MalwareBazaar · ThreatFox · URLHaus · OTX · Shodan             │
+│  ├── Vendor Advisories (Fortinet, Cisco, Palo Alto, MSRC, F5…)      │
+│  └── News (BleepingComputer, TheHackerNews, SANS ISC, NCSC…)        │
 │                            │                                        │
 │           Normalisation & Deduplication                             │
 │                            │                                        │
@@ -62,7 +62,7 @@ It answers the question every security team actually cares about:
 │  └── IP Geo/ASN enrichment · NVD full detail                        │
 │                            │                                        │
 │  Composite Risk Scoring                                             │
-│  CVSS × EPSS × KEV membership × Exploit availability × Activity    │
+│  CVSS × EPSS × KEV membership × Exploit availability × Activity     │
 │                            │                                        │
 │        Scheduler: every 4h · max_instances=1 · coalesce=True        │
 └────────────────────────────┬────────────────────────────────────────┘
@@ -92,10 +92,10 @@ It answers the question every security team actually cares about:
 │  ├── News & Intel feed                                              │
 │  ├── Pricing (Free / Pro / Enterprise + Paymob checkout)            │
 │  ├── Help & Support (live chat, FAQ, contact)                       │
-│  └── Profile (account, billing, API keys, TOTP, sessions)          │
+│  └── Profile (account, billing, API keys, TOTP, sessions)           │
 │                                                                     │
 │  Infrastructure                                                     │
-│  ├── AWS EC2 t3.micro · Ubuntu · Nginx · HTTPS/TLS                  │
+│  ├── Cloud-Native                                                   │
 │  ├── Docker Compose (API + Sandbox containers)                      │
 │  ├── PostgreSQL 14 (local, asyncpg)                                 │
 │  ├── Wazuh Agent (FIM, rootcheck, active response)                  │
