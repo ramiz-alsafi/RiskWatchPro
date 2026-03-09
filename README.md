@@ -2,36 +2,36 @@
 <img src="https://img.shields.io/badge/RiskWatchPro-Threat%20Intelligence-e94560?style=for-the-badge&logoColor=white" alt="RiskWatchPro"/>
 
 # ⚡ RiskWatchPro
-### Enterprise Threat Intelligence Platform
-
+### Threat Intelligence · Incident Response · GRC Automation
 **Real-time CVE tracking · MITRE ATT&CK mapping · EPSS scoring · GRC compliance · FAIR risk modeling**
 
 [![Live Platform](https://img.shields.io/badge/🌐%20Live-riskwatchpro.duckdns.org-e94560?style=flat-square)](https://riskwatchpro.duckdns.org)
 [![Anubis Engine](https://img.shields.io/badge/⚡%20Engine-anubispro.duckdns.org-7c3aed?style=flat-square)](https://anubispro.duckdns.org)
 [![GitHub](https://img.shields.io/badge/Built%20by-ramiz--alsafi-24292e?style=flat-square&logo=github)](https://github.com/ramiz-alsafi)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-ramez--alsafy-0a66c2?style=flat-square&logo=linkedin)](https://linkedin.com/in/ramez-alsafy-57b8b437b)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-ramiz--alsafi-0a66c2?style=flat-square&logo=linkedin)](https://linkedin.com/in/ramiz-alsafi-57b8b437b)
 
 ![Python](https://img.shields.io/badge/Python-3776ab?style=flat-square&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-61dafb?style=flat-square&logo=react&logoColor=black)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-EC2%20%2B%20S3%20%2B%20IAM-ff9900?style=flat-square&logo=amazonaws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat-square&logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
 ![Wazuh](https://img.shields.io/badge/Wazuh-Hardened-00aef0?style=flat-square)
-
 </div>
 
 ---
 
 ## 🔍 What is RiskWatchPro?
 
-RiskWatchPro is a production-grade threat intelligence SaaS platform built on top of **Anubis** — a custom Python engine that ingests, enriches, and correlates threat data from 60+ sources in real time.
+RiskWatchPro is a production-grade threat intelligence SaaS platform built on top of **Anubis** — a custom Python engine that ingests, enriches, and correlates threat data from 60+ sources every 4 hours.
 
 It answers the question every security team actually cares about:
 
 > *"Of the 20,000 CVEs published this year — which 12 are going to hit us this week, and what does it cost if they do?"*
 
-**Live stats (auto-updated):**
-- 🔴 11,000+ threats indexed
+**Live stats (auto-updated every 4 hours):**
+- 🔴 13,000+ threats indexed
 - ⚡ 60+ concurrent intelligence sources
 - 📡 WebSocket real-time feed
 - 🛡 ISO 27001 · NIST 800-53 · SOC 2 · PCI DSS coverage
@@ -41,115 +41,124 @@ It answers the question every security team actually cares about:
 ## 🏗 Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        ANUBIS ENGINE v6.5.2                     │
-│                                                                 │
-│  60+ Threat Feeds (concurrent via ThreadPoolExecutor)           │
-│  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB                │
-│  ├── Metasploit/Rapid7 · ZDI · Feodo Tracker · OSV              │
-│  ├── MalwareBazaar · ThreatFox · URLHaus · AbuseIPDB · Shodan   │
-│  ├── Vendor Advisories (Fortinet, Cisco, Palo Alto, MSRC...)    │
-│  └── News (BleepingComputer, TheHackerNews, CyberSecurityNews…) │
-│                          │                                      │
-│  Normalisation & Deduplication                                  │
-│                          │                                      │
-│  Enrichment Layer                                               │
-│  ├── EPSS scores (FIRST.org)                                    │
-│  ├── AttackerKB exploitation context                            │
-│  ├── MITRE ATT&CK STIX (691 techniques)                         │
-│  ├── Metasploit module cross-reference (3000+ CVEs)             │
-│  ├── ZDI advisory correlation                                   │
-│  └── IP Geo/ASN · NVD full detail                               │
-│                          │                                      │
-│  Composite Risk Scoring                                         │
-│  CVSS + EPSS + KEV membership + Exploit availability + Activity │
-└──────────────────────┬──────────────────────────────────────────┘
-                       │
-┌──────────────────────▼──────────────────────────────────────────┐
-│                     RISKWATCHPRO PLATFORM                       │
-│                                                                 │
-│  FastAPI Backend          React Frontend                        │
-│  ├── REST API             ├── Real-time dashboard               │
-│  ├── WebSocket feed       ├── MITRE ATT&CK heatmap              │
-│  ├── Auth (JWT + TOTP)    ├── Geographic threat map             │
-│  ├── Subscription gates   ├── FAIR risk calculator              │
-│  └── Paymob billing       └── GRC compliance module             │
-│                                                                 │
-│  PostgreSQL · Nginx · AWS EC2 · Wazuh · Docker                  │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                        ANUBIS ENGINE v9.0                           │
+│                                                                     │
+│  60+ Threat Feeds  (concurrent via ThreadPoolExecutor)              │
+│  ├── NVD · CISA KEV · VulnCheck KEV · Exploit-DB · OSV             │
+│  ├── Metasploit/Rapid7 · ZDI · Feodo Tracker · AbuseIPDB           │
+│  ├── MalwareBazaar · ThreatFox · URLHaus · OTX · Shodan            │
+│  ├── Vendor Advisories (Fortinet, Cisco, Palo Alto, MSRC, F5…)     │
+│  └── News (BleepingComputer, TheHackerNews, SANS ISC, NCSC…)       │
+│                            │                                        │
+│           Normalisation & Deduplication                             │
+│                            │                                        │
+│  Enrichment Layer                                                   │
+│  ├── EPSS scores (FIRST.org)                                        │
+│  ├── MITRE ATT&CK STIX (691 techniques mapped)                      │
+│  ├── Metasploit module cross-reference (3,000+ CVEs)                │
+│  ├── AttackerKB exploitation context                                │
+│  ├── ZDI advisory correlation                                       │
+│  └── IP Geo/ASN enrichment · NVD full detail                        │
+│                            │                                        │
+│  Composite Risk Scoring                                             │
+│  CVSS × EPSS × KEV membership × Exploit availability × Activity    │
+│                            │                                        │
+│        Scheduler: every 4h · max_instances=1 · coalesce=True        │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                      PostgreSQL (anubis_db)
+                             │
+┌────────────────────────────▼────────────────────────────────────────┐
+│                    RISKWATCHPRO PLATFORM  v9.0                      │
+│                                                                     │
+│  FastAPI Backend (Dockerized)                                       │
+│  ├── Threat intelligence API (paginated, filterable, sortable)      │
+│  ├── Stats & heatmap service                                        │
+│  ├── Sandbox detonation service                                     │
+│  ├── GRC compliance report engine                                   │
+│  ├── Auth service (JWT + TOTP 2FA)                                  │
+│  ├── Billing service (Paymob: card, Vodafone Cash, Fawry)           │
+│  ├── Email service (digest, preferences, unsubscribe)               │
+│  └── IOC lookup & news feed                                         │
+│                                                                     │
+│  React Frontend (Vite, served via Nginx)                            │
+│  ├── Landing (animated stats, live ticker, pricing)                 │
+│  ├── Dashboard (MITRE heatmap, severity charts, run tracker)        │
+│  ├── Threats (13,000+ CVEs, filters, enriched detail)               │
+│  ├── Intel Center (IOC lookup, threat actors)                       │
+│  ├── Sandbox (URL/IP/file detonation)                               │
+│  ├── GRC & Compliance (FAIR calculator, framework reports)          │
+│  ├── News & Intel feed                                              │
+│  ├── Pricing (Free / Pro / Enterprise + Paymob checkout)            │
+│  ├── Help & Support (live chat, FAQ, contact)                       │
+│  └── Profile (account, billing, API keys, TOTP, sessions)          │
+│                                                                     │
+│  Infrastructure                                                     │
+│  ├── AWS EC2 t3.micro · Ubuntu · Nginx · HTTPS/TLS                  │
+│  ├── Docker Compose (API + Sandbox containers)                      │
+│  ├── PostgreSQL 14 (local, asyncpg)                                 │
+│  ├── Wazuh Agent (FIM, rootcheck, active response)                  │
+│  └── Tawk.to live support                                           │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## ✨ Features
 
-| Threat database (11,000+) | 
-| Real-time WebSocket feed | 
-| EPSS + CVSS scoring |
-| MITRE ATT&CK mapping |
-| IOC Lookup | Limited |
-| FAIR Risk Calculator |
-| GRC Compliance (ISO/NIST/SOC2/PCI) |
-| Sandbox emulation |
-| Detection rule generation |
-| API access |
-| TOTP 2FA authentication |
-| Email digest notifications (post-run) |
-| Email preferences API (opt-in/out, unsubscribe) |
-| Live execution tracker (Run Now + log modal) |
-| SIEM push (Splunk/Sentinel) |
-| SLA + dedicated support |
+| Feature | Free | Pro | Enterprise |
+|---|:---:|:---:|:---:|
+| Threat database (13,000+) | ✓ | ✓ | ✓ |
+| Real-time WebSocket feed | ✓ | ✓ | ✓ |
+| EPSS + CVSS + Risk scoring | ✓ | ✓ | ✓ |
+| MITRE ATT&CK heatmap | ✓ | ✓ | ✓ |
+| FAIR Risk Calculator | ✓ | ✓ | ✓ |
+| CVE lookups/day | 100 | Unlimited | Unlimited |
+| IOC Lookup | Limited | ✓ | ✓ |
+| GRC Compliance Reports | — | ✓ | ✓ |
+| Sandbox emulation | — | 10/mo | Unlimited |
+| API access | — | ✓ | ✓ |
+| TOTP 2FA | ✓ | ✓ | ✓ |
+| Email digest notifications | ✓ | ✓ | ✓ |
+| Team seats | — | — | 10 |
+| Dedicated support + SLA | — | — | ✓ |
 
 ---
-
-## 🚀 Quick Start (Self-hosted)
 
 ## 📁 Project Structure
 
 ```
 riskwatchpro/
-├── Anubis/                   
-│   ├── main.py               
-│   ├── fetchers/             
-│   ├── enrichment/            
-│   ├── scoring/              
-│   ├── cache/                 
-│   └── output/               
+├── Anubis/
+│   ├── main.py
+│   ├── fetchers/
+│   ├── enrichment/
+│   ├── scoring/
+│   └── output/
 │
-├── backend/                  
-│   ├── main.py               
-│   ├── api/                  
-│   │   ├── threats.py        
-│   │   ├── news.py            
-│   │   ├── stats.py          
-│   │   ├── auth.py          
-│   │   ├── billing.py         
-│   │   └── grc.py            
-│   ├── models/              
-│   ├── schemas/              
-│   ├── middleware/            
-│   └── alembic/              
+├── backend/
+│   ├── main.py
+│   ├── api/
+│   ├── models/
+│   ├── schemas/
+│   ├── services/
+│   ├── middleware/
+│   └── alembic/
 │
-├── frontend/                 
+├── frontend/
 │   └── src/
-│       ├── pages/            
-│       ├── components/      
-│       ├── api/              
-│       ├── context/          
-│       └── store/             
+│       ├── pages/
+│       ├── components/
+│       ├── api/
+│       ├── context/
+│       └── store/
 │
-├── docs/                     
-│   ├── nginx.conf            
-│   ├── architecture.md        
-│   └── api.md                
-│
+├── docs/
 ├── .github/
 │   └── workflows/
-│       ├── deploy.yml         
-│       └── ci.yml            
-│
-├── docker-compose.yml         
-└── .env.example              
+├── docker-compose.yml
+└── .env.example
 ```
 
 ---
@@ -169,7 +178,7 @@ riskwatchpro/
 
 **Exploit Intelligence**
 - Exploit-DB
-- Rapid7 / Metasploit Framework (3000+ modules)
+- Rapid7 / Metasploit Framework (3,000+ modules)
 - Zero Day Initiative (ZDI)
 - Huntr AI/ML CVEs
 
@@ -188,6 +197,7 @@ riskwatchpro/
 - Cisco Talos
 - Palo Alto Networks
 - Check Point
+- F5
 - SonicWall
 - Sophos
 
@@ -202,6 +212,8 @@ riskwatchpro/
 
 </details>
 
+---
+
 ## 🛡 Security & Infrastructure
 
 - **Hardened AMI** — custom AWS EC2 image, minimal attack surface
@@ -209,29 +221,30 @@ riskwatchpro/
 - **IAM least-privilege** — scoped roles, no wildcard permissions
 - **Nginx** — HTTPS only, HSTS, security headers, server tokens off
 - **JWT Auth** — short-lived access tokens, refresh rotation
-- **TOTP 2FA** — per-user TOTP authentication
-- **Email API** — with test, status, preferences, unsubscribe, manual digest trigger
-- **Rate limiting** — per-endpoint, per-user, per-plan limits
+- **TOTP 2FA** — per-user authenticator app support
+- **Email service** — digest, preferences, opt-in/out, unsubscribe, manual trigger
+- **Rate limiting** — per-endpoint, per-user, per-plan
 
 ---
 
 ## 📊 Roadmap
 
-- [x] Anubis v6.5.2 — 60+ source engine
-- [x] RiskWatchPro v1 — Full-stack SaaS platform
+- [x] Anubis v9.0 — 60+ source engine
+- [x] RiskWatchPro — full-stack SaaS platform
 - [x] Real-time WebSocket feed
-- [x] MITRE ATT&CK heatmap
+- [x] MITRE ATT&CK heatmap (all 13,000+ threats)
 - [x] FAIR risk calculator
 - [x] GRC module (ISO/NIST/SOC2/PCI)
 - [x] Geographic threat actor map
 - [x] TOTP 2FA authentication
-- [x] Email digest notifications (post-run, per-user opt-in)
-- [x] Email API (`/api/v1/emails/` — test, status, preferences, unsubscribe, manual trigger)
+- [x] Email digest & preferences API
 - [x] Live execution tracker (Run Now + log modal)
-- [x] Scheduler race condition fix (max_instances=1, coalesce=True)
-- [ ] **Billing integration** (in progress)
-- [ ] **AI/ML threat prioritisation layer** (up next)
-- [ ] **Cloud-native deployment** (ECS Fargate + Lambda + RDS Multi-AZ + CloudFront)
+- [x] Pricing page + payment method selector (Paymob)
+- [x] Help & Support center (live chat, FAQ, contact)
+- [x] Keyboard navigation shortcuts
+- [ ] **Billing go-live** (pending Paymob account verification)
+- [ ] **AI/ML threat prioritisation layer**
+- [ ] **Cloud-native deployment** (ECS Fargate + RDS Multi-AZ + CloudFront)
 - [ ] SIEM push (Splunk / Microsoft Sentinel)
 - [ ] Mobile app (React Native)
 
@@ -242,7 +255,7 @@ riskwatchpro/
 **Ramiz Alsafi** — Penetration Tester · Red Team Operator · Threat Intelligence Engineer
 
 📍 Alexandria, Egypt  
-🔗 [LinkedIn](https://linkedin.com/in/ramez-alsafy-57b8b437b)  
+🔗 [LinkedIn](https://linkedin.com/in/ramiz-alsafi-57b8b437b)  
 🐙 [GitHub](https://github.com/ramiz-alsafi)  
 💬 [WhatsApp](https://wa.me/201002921824)  
 📞 +20 100 292 1824
