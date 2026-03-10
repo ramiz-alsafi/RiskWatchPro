@@ -239,7 +239,7 @@ riskwatchpro/
 - [x] TOTP 2FA authentication
 - [x] Email digest & preferences API
 - [x] Live execution tracker (Run Now + log modal)
-- [x] Pricing page + payment method selector (Paymob)
+- [x] Pricing page + payment method selector
 - [x] Help & Support center (live chat, FAQ, contact)
 - [x] Keyboard navigation shortcuts
 - [ ] **Billing go-live** (pending Paymob account verification)
