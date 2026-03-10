@@ -242,7 +242,7 @@ riskwatchpro/
 - [x] Pricing page + payment method selector
 - [x] Help & Support center (live chat, FAQ, contact)
 - [x] Keyboard navigation shortcuts
-- [ ] **Billing go-live** (pending Paymob account verification)
+- [ ] **Billing go-live**
 - [ ] **AI/ML threat prioritisation layer**
 - [ ] **Cloud-native deployment** (ECS Fargate + RDS Multi-AZ + CloudFront)
 - [ ] SIEM push (Splunk / Microsoft Sentinel)
