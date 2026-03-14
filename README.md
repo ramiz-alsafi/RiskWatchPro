@@ -6,7 +6,7 @@
 **Real-time CVE tracking · MITRE ATT&CK mapping · EPSS scoring · GRC compliance · FAIR risk modeling**
 
 [![Live Platform](https://img.shields.io/badge/🌐%20Live-riskwatchpro.online-e94560?style=flat-square)](https://riskwatchpro.online)
-[![Anubis Engine](https://img.shields.io/badge/⚡%20Engine-riskwatchpro.online-7c3aed?style=flat-square)](https://anubispro.online)
+[![Anubis Engine](https://img.shields.io/badge/⚡%20Engine-riskwatchpro.online-7c3aed?style=flat-square)](https:/riskwatchpro.online)
 [![GitHub](https://img.shields.io/badge/Built%20by-ramiz--alsafi-24292e?style=flat-square&logo=github)](https://github.com/ramiz-alsafi)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-ramiz--alsafi-0a66c2?style=flat-square&logo=linkedin)](https://linkedin.com/in/ramiz-alsafi-57b8b437b)
 
