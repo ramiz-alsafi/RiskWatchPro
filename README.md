@@ -35,7 +35,7 @@ It answers the question every security team actually cares about:
 > *"Of the 20,000 CVEs published this year , which 12 are going to hit us this week, and what does it cost if they do?"*
 
 **Live stats (auto-updated every 4 hours):**
-- 🔴 13,000+ threats indexed
+- 🔴 18,000+ threats indexed
 - ⚡ 60+ concurrent intelligence sources
 - 📡 WebSocket real-time feed
 - 🛡 ISO 27001 · NIST 800-53 · SOC 2 · PCI DSS coverage
