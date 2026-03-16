@@ -19,6 +19,8 @@
 ![AWS](https://img.shields.io/badge/AWS-EC2%20%2B%20S3%20%2B%20IAM-ff9900?style=flat-square&logo=amazonaws&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat-square&logo=docker&logoColor=white)
 ![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Prometheus-e6522c?style=flat-square&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-f46800?style=flat-square&logo=grafana&logoColor=white)
 ![WireGuard](https://img.shields.io/badge/WireGuard-VPN%20Mesh-88171a?style=flat-square&logo=wireguard&logoColor=white)
 ![Wazuh](https://img.shields.io/badge/Wazuh-Hardened-00aef0?style=flat-square)
 
@@ -28,11 +30,11 @@
 
 ## 🔍 What is RiskWatchPro?
 
-RiskWatchPro is a production-grade threat intelligence SaaS platform built on top of **Anubis** , a custom Python engine that ingests, enriches, and correlates threat data from 60+ sources every 4 hours.
+RiskWatchPro is a production-grade threat intelligence SaaS platform built on top of **Anubis**, a custom Python engine that ingests, enriches, and correlates threat data from 60+ sources every 4 hours.
 
 It answers the question every security team actually cares about:
 
-> *"Of the 20,000 CVEs published this year , which 12 are going to hit us this week, and what does it cost if they do?"*
+> *"Of the 20,000 CVEs published this year, which 12 are going to hit us this week, and what does it cost if they do?"*
 
 **Live stats (auto-updated every 4 hours):**
 - 🔴 18,000+ threats indexed
@@ -101,12 +103,18 @@ It answers the question every security team actually cares about:
 │  Infrastructure                                                     │
 │  ├── Cloud-Native                                                   │
 │  ├── Docker Compose                                                 │
-│  ├── Redis 7 —                                                      │
+│  ├── Redis 7                                                        │
 │  ├── PostgreSQL                                                     │
 │  ├── Nginx — reverse proxy, buffer-tuned, rate-limited              │
 │  ├── WireGuard — encrypted mesh VPN for secure server access        │
 │  ├── Wazuh Agent                                                    │
 │  └── Tawk.to live support                                           │
+│                                                                     │
+│  Observability Stack                                                │
+│  ├── Prometheus — metrics collection                                │
+│  ├── Grafana — dashboards                                           │
+│  ├── Node Exporter — Host metrics                                   │ 
+│  └── prometheus-fastapi-instrumentator                              │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -160,6 +168,11 @@ riskwatchpro/
 │       ├── api/
 │       ├── context/
 │       └── store/
+│
+├── monitoring/
+│   ├── prometheus.yml
+│   └── grafana/
+│       └── provisioning/
 │
 ├── docs/
 ├── .github/
@@ -226,12 +239,27 @@ riskwatchpro/
 - **WireGuard VPN mesh** — no traditional remote access ports exposed
 - **Wazuh Agent** — real-time log monitoring, FIM, rootcheck, active response (auto IP blocking)
 - **IAM least-privilege** — scoped roles, no wildcard permissions
-- **Nginx** — HTTPS only, HSTS, security headers, buffer-tuned, rate-limited per endpoint, server tokens off
-- **Redis cache layer** — TTL-based in-memory caching middleware on all read-heavy API endpoints, reducing DB load and response latency
+- **Cloudflare proxy** — DDoS protection,
+- **Nginx** — HTTPS only,security headers, buffer-tuned, rate-limited per endpoint
+- **Redis cache layer** — TTL-based in-memory caching middleware on all read-heavy API endpoints
 - **JWT Auth** — short-lived access tokens, refresh rotation
 - **TOTP 2FA** — per-user authenticator app support
 - **Email service** — digest, preferences, opt-in/out, unsubscribe, manual trigger
 - **Rate limiting** — per-endpoint, per-user, per-plan
+
+---
+
+## 📊 Observability
+
+Full self-hosted monitoring stack running as Docker services alongside the platform:
+
+| Service | Role |
+|---|---|
+| **Prometheus** | Metrics collection |
+| **Grafana** | Dashboards  |
+| **Node Exporter** | Host metrics  |
+| **prometheus-fastapi-instrumentator** | request rates, latency, status codes |
+
 
 ---
 
@@ -242,22 +270,24 @@ riskwatchpro/
 - [x] Real-time WebSocket feed
 - [x] MITRE ATT&CK heatmap (all 18,000+ threats)
 - [x] FAIR risk calculator
-- [x] GRC module (ISO/NIST/SOC2/PCI)
+- [x] GRC module 
 - [x] Geographic threat actor map
 - [x] TOTP 2FA authentication
 - [x] Email digest & preferences API
-- [x] Live execution tracker 
+- [x] Live execution tracker
 - [x] Pricing page + payment method selector
-- [x] Help & Support center 
+- [x] Help & Support center
 - [x] Keyboard navigation shortcuts
-- [x] Redis caching layer 
-- [x] Nginx proxy buffer tuning — eliminated disk buffering
-- [x] WireGuard VPN mesh — hardened remote access
+- [x] Redis caching layer
+- [x] Nginx proxy buffer tuning 
+- [x] WireGuard VPN mesh 
+- [x] Cloudflare hardening 
+- [x] Full observability stack — Prometheus + Grafana + Node Exporter
 - [ ] **Billing go-live**
 - [ ] **AI/ML threat prioritisation layer**
-- [ ] **Cloud-native deployment** 
-- [ ] SIEM push 
-- [ ] Mobile app 
+- [ ] **Cloud-native deployment**
+- [ ] SIEM push
+- [ ] Mobile app
 
 ---
 
@@ -279,5 +309,3 @@ riskwatchpro/
 MIT License — see LICENSE for details.
 Commercial use requires a license key obtained via the platform.
 ```
-
----
