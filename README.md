@@ -37,7 +37,7 @@ It answers the question every security team actually cares about:
 > *"Of the 20,000 CVEs published this year, which 12 are going to hit us this week, and what does it cost if they do?"*
 
 **Live stats (auto-updated every 4 hours):**
-- 🔴 18,000+ threats indexed
+- 🔴 20,000+ threats indexed
 - ⚡ 60+ concurrent intelligence sources
 - 📡 WebSocket real-time feed
 - 🛡 ISO 27001 · NIST 800-53 · SOC 2 · PCI DSS coverage
@@ -86,34 +86,36 @@ It answers the question every security team actually cares about:
 │  ├── Auth service (JWT + TOTP 2FA)                                  │
 │  ├── Billing service                                                │
 │  ├── Email service (digest, preferences, unsubscribe)               │
-│  └── IOC lookup & news feed                                         │
+│  ├── IOC lookup & news feed                                         │
+│  └── Email Inspector (phishing analysis, IP reputation, PDF report) │
 │                                                                     │
-│  React Frontend (Vite, served via Nginx)                            │
+│  React Frontend                                                     │
 │  ├── Landing (animated stats, live ticker, pricing)                 │
+│  ├── Email Inspector (free, no login — public phishing analysis)    │
 │  ├── Dashboard (MITRE heatmap, severity charts, run tracker)        │
-│  ├── Threats (18,000+ CVEs, filters, enriched detail)               │
+│  ├── Threats (20,000+ CVEs, filters, enriched detail)               │
 │  ├── Intel Center (IOC lookup, threat actors)                       │
 │  ├── Sandbox (URL/IP/file detonation)                               │
-│  ├── GRC & Compliance (FAIR calculator, framework reports)          │
+│  ├── GRC & Compliance                                               │
 │  ├── News & Intel feed                                              │
-│  ├── Pricing (Free / Pro / Enterprise + Paymob checkout)            │
+│  ├── Pricing (Free / Pro / checkout)                                │
 │  ├── Help & Support (live chat, FAQ, contact)                       │
 │  └── Profile (account, billing, API keys, TOTP, sessions)           │
 │                                                                     │
 │  Infrastructure                                                     │
-│  ├── Cloud-Native                                                   │
 │  ├── Docker Compose                                                 │
 │  ├── Redis 7                                                        │
 │  ├── PostgreSQL                                                     │
-│  ├── Nginx — reverse proxy, buffer-tuned, rate-limited              │
-│  ├── WireGuard — encrypted mesh VPN for secure server access        │
+│  ├── Nginx                                                          │
+│  ├── WireGuard                                                      │
 │  ├── Wazuh Agent                                                    │
+│  ├── GitHub Actions CI/CD                                           │
 │  └── Tawk.to live support                                           │
 │                                                                     │
 │  Observability Stack                                                │
 │  ├── Prometheus — metrics collection                                │
 │  ├── Grafana — dashboards                                           │
-│  ├── Node Exporter — Host metrics                                   │ 
+│  ├── Node Exporter — Host metrics                                   │
 │  └── prometheus-fastapi-instrumentator                              │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -124,11 +126,12 @@ It answers the question every security team actually cares about:
 
 | Feature | Free | Pro | Enterprise |
 |---|:---:|:---:|:---:|
-| Threat database (13,000+) | ✓ | ✓ | ✓ |
+| Threat database (20,000+) | ✓ | ✓ | ✓ |
 | Real-time WebSocket feed | ✓ | ✓ | ✓ |
 | EPSS + CVSS + Risk scoring | ✓ | ✓ | ✓ |
 | MITRE ATT&CK heatmap | ✓ | ✓ | ✓ |
 | FAIR Risk Calculator | ✓ | ✓ | ✓ |
+| **Email Inspector** (phishing analysis) | ✓ | ✓ | ✓ |
 | CVE lookups/day | 100 | Unlimited | Unlimited |
 | IOC Lookup | Limited | ✓ | ✓ |
 | GRC Compliance Reports | — | ✓ | ✓ |
@@ -144,40 +147,35 @@ It answers the question every security team actually cares about:
 ## 📁 Project Structure
 
 ```
-riskwatchpro/
-├── Anubis/
-│   ├── main.py
-│   ├── fetchers/
-│   ├── enrichment/
-│   ├── scoring/
-│   └── output/
-│
+anubis-platform/
 ├── backend/
-│   ├── main.py
-│   ├── api/
-│   ├── models/
-│   ├── schemas/
-│   ├── services/
-│   ├── middleware/
-│   └── alembic/
+│   ├── app/
+│   │   ├── api/         
+│   │   ├── core/         
+│   │   ├── models/      
+│   │   ├── schemas/      
+│   │   ├── services/     
+│   │   └── main.py
+│   ├── alembic/
+│   └── Dockerfile
 │
 ├── frontend/
 │   └── src/
-│       ├── pages/
-│       ├── components/
+│       ├── pages/        
+│       ├── components/  
 │       ├── api/
-│       ├── context/
+│       ├── context/     
 │       └── store/
 │
 ├── monitoring/
 │   ├── prometheus.yml
 │   └── grafana/
-│       └── provisioning/
 │
-├── docs/
 ├── .github/
 │   └── workflows/
-├── docker-compose.yml
+│       └── deploy.yml   
+│
+└── docker-compose.yml
 ```
 
 ---
@@ -239,8 +237,8 @@ riskwatchpro/
 - **WireGuard VPN mesh** — no traditional remote access ports exposed
 - **Wazuh Agent** — real-time log monitoring, FIM, rootcheck, active response (auto IP blocking)
 - **IAM least-privilege** — scoped roles, no wildcard permissions
-- **Cloudflare proxy** — DDoS protection,
-- **Nginx** — HTTPS only,security headers, buffer-tuned, rate-limited per endpoint
+- **Cloudflare proxy** — DDoS protection, WAF, IP whitelisting
+- **Nginx** — HTTPS only, security headers, buffer-tuned, rate-limited per endpoint
 - **Redis cache layer** — TTL-based in-memory caching middleware on all read-heavy API endpoints
 - **JWT Auth** — short-lived access tokens, refresh rotation
 - **TOTP 2FA** — per-user authenticator app support
@@ -256,36 +254,35 @@ Full self-hosted monitoring stack running as Docker services alongside the platf
 | Service | Role |
 |---|---|
 | **Prometheus** | Metrics collection |
-| **Grafana** | Dashboards  |
-| **Node Exporter** | Host metrics  |
-| **prometheus-fastapi-instrumentator** | request rates, latency, status codes |
+| **Grafana** | Dashboards |
+| **Node Exporter** | Host metrics |
+| **cAdvisor** | Container metrics |
+| **Redis Exporter** | Redis metrics |
+| **prometheus-fastapi-instrumentator** | Request rates, latency, status codes |
 
-
----
 
 ## 📊 Roadmap
 
 - [x] Anubis v9.0 — 60+ source engine
 - [x] RiskWatchPro — full-stack SaaS platform
 - [x] Real-time WebSocket feed
-- [x] MITRE ATT&CK heatmap (all 18,000+ threats)
+- [x] MITRE ATT&CK heatmap (all 20,000+ threats)
 - [x] FAIR risk calculator
-- [x] GRC module 
+- [x] GRC module
 - [x] Geographic threat actor map
 - [x] TOTP 2FA authentication
 - [x] Email digest & preferences API
 - [x] Live execution tracker
 - [x] Pricing page + payment method selector
 - [x] Help & Support center
-- [x] Keyboard navigation shortcuts
 - [x] Redis caching layer
-- [x] Nginx proxy buffer tuning 
-- [x] WireGuard VPN mesh 
-- [x] Cloudflare hardening 
-- [x] Full observability stack — Prometheus + Grafana + Node Exporter
-- [ ] **Billing go-live**
-- [ ] **AI/ML threat prioritisation layer**
-- [ ] **Cloud-native deployment**
+- [x] Nginx proxy buffer tuning
+- [x] WireGuard VPN mesh
+- [x] Cloudflare hardening
+- [x] Full observability stack 
+- [x] **Email Inspector** 
+- [x] **GitHub Actions CI/CD** 
+- [ ] **Billing go-live** 
 - [ ] SIEM push
 - [ ] Mobile app
 
