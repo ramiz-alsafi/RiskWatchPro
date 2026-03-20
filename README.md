@@ -109,14 +109,17 @@ It answers the question every security team actually cares about:
 │  ├── Nginx                                                          │
 │  ├── WireGuard                                                      │
 │  ├── Wazuh Agent                                                    │
-│  ├── GitHub Actions CI/CD                                           │
+│  ├── GitHub Actions CI/CD                                           |
+|  ├── pgAdmin                                                        │
 │  └── Tawk.to live support                                           │
 │                                                                     │
 │  Observability Stack                                                │
 │  ├── Prometheus — metrics collection                                │
 │  ├── Grafana — dashboards                                           │
 │  ├── Node Exporter — Host metrics                                   │
-│  └── prometheus-fastapi-instrumentator                              │
+│  ├── prometheus-fastapi-instrumentator                              |
+|  ├── PostgreSQL Exporter                                            |
+|  └── NGINX Exporter                                                 |
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -281,7 +284,11 @@ Full self-hosted monitoring stack running as Docker services alongside the platf
 - [x] Cloudflare hardening
 - [x] Full observability stack 
 - [x] **Email Inspector** 
-- [x] **GitHub Actions CI/CD** 
+- [x] **GitHub Actions CI/CD**
+- [x] observability exporters
+- [x] SEO hardening 
+- [x] Google Analytics 4 + GDPR compliant
+- [x] Frontend code splitting 
 - [ ] **Billing go-live** 
 - [ ] SIEM push
 - [ ] Mobile app
